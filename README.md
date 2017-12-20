@@ -10,7 +10,7 @@ Instructions:
 Please save your okpy html page as an html document and put it in this folder.
 (You can do this by hitting Command-s or control-s and choosing to save it as 'Webpage, HTML only')
 Make sure it is saved as 'index.html'.
-Run the program by calling `$ python3 calc.py` in your terminal, once you are in the repo.
+Run the program by calling `$python3 calc.py` in your terminal, once you are in the repo.
 
 *Made by Sambhav Sunkerneni*
 
