@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 #Okpy Grade Calculator for CS61a Fall 2017
 #
 #Note: Make Sure To Use Python3
-#Requires Beautiful Soup & the lxml parser. You can install both very easily with the instructions here:
-#https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-beautiful-soup
 #
 #Instructions: 
 #Please save your okpy html page as an html document and put it in this folder.
@@ -21,7 +19,7 @@ grade_to_score = [
 	"A+  ≥ 296",
 	"A  ≥ 280",
 	"A-  ≥ 265",
-	"B+  ≥ 245 ",
+	"B+  ≥ 245",
 	"B  ≥ 225",
 	"B-  ≥ 205",
 	"C+  ≥ 195",
@@ -35,9 +33,9 @@ all_scores = {}
 part_scores = {}
 for row in rows:
 	vals = row.find_all("a")
+	name = vals[0].contents[0].lower().strip()
 	if len(vals) == 2:
-		name_tag, grade_tag = vals[0], vals[1]
-		name = name_tag.contents[0].lower().strip()
+		grade_tag = vals[1]
 		grade = grade_tag.contents[0]
 		score = float(grade[grade.index(":") + 1 :])
 		if ("quiz" in name) or ("check-off" in name) or ("free participation point" in name) or ("lab" in name):
@@ -55,12 +53,10 @@ for row in rows:
 				print("Error: Unsure Where This Item Goes")
 				print(name, score)
 	elif len(vals) == 1:
-		name = str(vals[0].contents[0]).strip()
 		uncomplete_scores[name] = 0
-	elif vals[0].contents[0].lower().strip() == "homework 1":
+	elif name == "homework 1":
 		#Special Case For Homework 1
-		name_tag, grade_tag1, grade_tag2 = vals[0], vals[1], vals[2]
-		name = name_tag.contents[0].lower().strip()
+		grade_tag1, grade_tag2 = vals[1], vals[2]
 		all_scores[name] = score
 		grade1 = grade_tag1.contents[0]
 		grade2 = grade_tag2.contents[0]
@@ -69,8 +65,7 @@ for row in rows:
 		hw += max(score1,score2)
 	else:
 		#Projects
-		name_tag, grade_tags = vals[0], vals[1:]
-		name = name_tag.contents[0].lower().strip()
+		grade_tags = vals[1:]
 		scores = {}
 		for tag in grade_tags:
 			info = tag.contents[0]
