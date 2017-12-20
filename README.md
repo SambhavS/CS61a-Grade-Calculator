@@ -14,5 +14,7 @@ Run the program by calling | $python3 calc.py | in your terminal, once you are i
 
 Made by Sambhav Sunkerneni
 
-Example Output
+Example Usage
+
+
 ![alt text](Screen%20Shot%202017-12-20%20at%203.41.17%20PM.png)
