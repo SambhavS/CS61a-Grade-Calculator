@@ -57,7 +57,7 @@ for row in rows:
 	elif len(vals) == 1:
 		name = str(vals[0].contents[0]).strip()
 		uncomplete_scores[name] = 0
-	elif len(vals) == 3:
+	elif vals[0].contents[0].lower().strip() == "homework 1":
 		#Special Case For Homework 1
 		name_tag, grade_tag1, grade_tag2 = vals[0], vals[1], vals[2]
 		name = name_tag.contents[0].lower().strip()
