@@ -13,7 +13,7 @@ Made by Sambhav Sunkerneni
 """
 
 #Initializations
-participation, hw, midterm, contest_ec, projects = 0, 0, 0, 0, 0
+participation, hw, exam, extra_cred, projects = 0, 0, 0, 0, 0
 uncomplete_scores, point_scores, part_scores = {}, {}, {}
 grade_to_score = [
 	"A+  ≥ 296",
@@ -49,10 +49,10 @@ for row in rows:
 			point_scores[name] = score
 			if "homework" in name:
 				hw += score
-			elif "midterm" in name:
-				midterm += score
-			elif "contest" in name:
-				contest_ec += score
+			elif "contest" in name or "ec" in name:
+				extra_cred += score
+			elif "midterm" in name or "final" in name:
+				exam += score
 			else:
 				print("Error: Unsure Where This Item Goes")
 				print(name, score)
@@ -88,11 +88,9 @@ for row in rows:
 
 #Adjustments
 participation = min(participation,10)
-overall_list = [hw, midterm, contest_ec, projects, participation]
-overall_dict = {"hw (out of 25)":hw,"midterm (out of 90)":midterm, "contest_ec (out of 0)":contest_ec, "projects (out of 100)":projects, "participation (out of 10)":participation}
-overall = sum(overall_list)
-
-#Main Loop Functions
+overall_list = [hw, exam, extra_cred, projects, participation]
+overall_dict = {"hw (out of 25)":hw,"exam (out of 165)":exam, "extra_cred (out of 0)":extra_cred, "projects (out of 100)":projects, "participation (out of 10)":participation}
+final_points = sum(overall_list)
 def get_grade(score):
 	if score >=296:
 		return "A+"
@@ -134,24 +132,18 @@ def setup():
 def main(first):
 	print()
 	if first:
-		print("Your Pre-Final Score is",overall)
+		print("Your Final Score is",final_points,"out of 300.("+get_grade(final_points)+")")
 	print("Enter the number that corresponds to the data you would like to see:")
-	print("1 : Final Score")
-	print("2 : All Scores")
-	print("3 : Scores For Each Category")
-	print("4 : Score to Grade Table")
-	print("5 : Exit")
+	print("1 : All Scores")
+	print("2 : Scores For Each Category")
+	print("3 : Score to Grade Table")
+	print("4 : Exit")
 	choice = int(input("Your Numerical Choice: "))
 	print()
-	if(choice == 5):
+	if(choice == 4):
 		print("Goodbye & good luck!")
 	else:
 		if choice == 1:
-			final = float(input("What did you get on the final? "))
-			final_points = final + overall
-			print()
-			print("Your Final Score is:",final_points,"(",get_grade(final_points),")")
-		elif choice == 2:
 			print()
 			print("Point Scores")
 			for key,val in point_scores.items():
@@ -164,10 +156,10 @@ def main(first):
 			print("Uncompleted Assignment Scores")
 			for key,val in uncomplete_scores.items():
 				print(key,val)
-		elif choice == 3:
+		elif choice == 2:
 			for key, val in overall_dict.items():
 				print(key,val)
-		elif choice == 4:
+		elif choice == 3:
 			for pair in grade_to_score:
 				print(pair)
 		main(False)
