@@ -11,10 +11,10 @@ from bs4 import BeautifulSoup
 #
 #Made by Sambhav Sunkerneni
 ###
-with open("index.html") as fp:
-    soup = BeautifulSoup(fp,"lxml")
-rows = soup.find_all("tr")[1:]
+
+#Initializations
 participation, hw, midterm, contest_ec, projects = 0, 0, 0, 0, 0
+uncomplete_scores, point_scores, part_scores = {}, {}, {}
 grade_to_score = [
 	"A+  ≥ 296",
 	"A  ≥ 280",
@@ -28,9 +28,13 @@ grade_to_score = [
 	"D+  ≥ 170",
 	"D  ≥ 165",
 	"D-  ≥ 160"]
-uncomplete_scores = {}
-all_scores = {}
-part_scores = {}
+
+#Setup Beautiful Soup
+with open("index.html") as fp:
+    soup = BeautifulSoup(fp,"lxml")
+rows = soup.find_all("tr")[1:]
+
+#Analyze Each Assignment
 for row in rows:
 	vals = row.find_all("a")
 	name = vals[0].contents[0].lower().strip()
@@ -42,7 +46,7 @@ for row in rows:
 			participation += score
 			part_scores[name] = score
 		else:
-			all_scores[name] = score
+			point_scores[name] = score
 			if "homework" in name:
 				hw += score
 			elif "midterm" in name:
@@ -57,7 +61,7 @@ for row in rows:
 	elif name == "homework 1":
 		#Special Case For Homework 1
 		grade_tag1, grade_tag2 = vals[1], vals[2]
-		all_scores[name] = score
+		point_scores[name] = score
 		grade1 = grade_tag1.contents[0]
 		grade2 = grade_tag2.contents[0]
 		score1 = float(grade1[grade1.index(":") + 1 :])
@@ -79,8 +83,10 @@ for row in rows:
 			scores["Revision"], scores["Composition"] = 0, 0
 		for val in scores.values():
 			project_score += val
-		all_scores[name] = project_score
+		point_scores[name] = project_score
 		projects += project_score
+
+#Adjustments
 participation = min(participation,10)
 overall_list = [hw, midterm, contest_ec, projects, participation]
 overall_dict = {"hw (out of 25)":hw,"midterm (out of 90)":midterm, "contest_ec (out of 0)":contest_ec, "projects (out of 100)":projects, "participation (out of 10)":participation}
@@ -118,7 +124,7 @@ def main(first):
 		elif choice == 2:
 			print()
 			print("Point Scores")
-			for key,val in all_scores.items():
+			for key,val in point_scores.items():
 				print(key,val)
 			print()
 			print("Participation Scores")
