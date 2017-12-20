@@ -91,6 +91,8 @@ participation = min(participation,10)
 overall_list = [hw, midterm, contest_ec, projects, participation]
 overall_dict = {"hw (out of 25)":hw,"midterm (out of 90)":midterm, "contest_ec (out of 0)":contest_ec, "projects (out of 100)":projects, "participation (out of 10)":participation}
 overall = sum(overall_list)
+
+#Main Loop Functions
 def get_grade(score):
 	if score >=296:
 		return "A+"
