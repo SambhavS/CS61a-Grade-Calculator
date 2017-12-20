@@ -1,4 +1,4 @@
-# okpy_grade_calculator
+# CS61a Grade Calculator
 Calculates your grade &amp; other grade-related functions. For CS61a Fall 2017
 
 Note: Make Sure To Use Python3
