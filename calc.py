@@ -91,6 +91,33 @@ participation = min(participation,10)
 overall_list = [hw, midterm, contest_ec, projects, participation]
 overall_dict = {"hw (out of 25)":hw,"midterm (out of 90)":midterm, "contest_ec (out of 0)":contest_ec, "projects (out of 100)":projects, "participation (out of 10)":participation}
 overall = sum(overall_list)
+def get_grade(score):
+	if score >=296:
+		return "A+"
+	elif score >= 280:
+		return "A"
+	elif score >= 265:
+		return "A-"
+	elif score >= 245:
+		return "B+"
+	elif score >= 225:
+		return "B"
+	elif score >= 205:
+		return "B-"
+	elif score >= 195:
+		return "C+"
+	elif score >= 185:
+		return "C"
+	elif score >= 175:
+		return "C-"
+	elif score >= 170:
+		return "D+"
+	elif score >= 165:
+		return "D"
+	elif score >= 160:
+		return "D-"
+	else:
+		return "F"
 
 def setup():
 	print()
@@ -119,8 +146,9 @@ def main(first):
 	else:
 		if choice == 1:
 			final = float(input("What did you get on the final? "))
+			final_points = final + overall
 			print()
-			print("Your Final Score is:",final+overall)
+			print("Your Final Score is:",final_points,"(",get_grade(final_points),")")
 		elif choice == 2:
 			print()
 			print("Point Scores")
