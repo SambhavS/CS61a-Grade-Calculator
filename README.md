@@ -15,4 +15,4 @@ Run the program by calling | $python3 calc.py | in your terminal, once you are i
 Made by Sambhav Sunkerneni
 
 Example Output
-![alt text](http://img.png)
+![alt text](https://raw.githubusercontent.com/SambhavS/CS61a-Grade-Calculator/blob/master/Screen%20Shot%202017-12-20%20at%203.41.17%20PM.png)
