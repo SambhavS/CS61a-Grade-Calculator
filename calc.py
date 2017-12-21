@@ -17,16 +17,16 @@ participation, hw, exam, extra_cred, projects = 0, 0, 0, 0, 0
 uncomplete_scores, point_scores, part_scores = {}, {}, {}
 grade_to_score = [
 	"A+  ≥ 296",
-	"A  ≥ 280",
+	"A   ≥ 280",
 	"A-  ≥ 265",
 	"B+  ≥ 245",
-	"B  ≥ 225",
+	"B   ≥ 225",
 	"B-  ≥ 205",
 	"C+  ≥ 195",
-	"C  ≥ 185 ",
+	"C   ≥ 185 ",
 	"C-  ≥ 175",
 	"D+  ≥ 170",
-	"D  ≥ 165",
+	"D   ≥ 165",
 	"D-  ≥ 160"]
 
 #Setup Beautiful Soup
